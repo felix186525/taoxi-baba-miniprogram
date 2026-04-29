@@ -7,6 +7,7 @@ const db = cloud.database();
 exports.main = async () => {
   const { OPENID } = cloud.getWXContext();
   const now = db.serverDate();
+  await ensureCollections();
 
   const userQuery = await db.collection("users").where({ openid: OPENID }).limit(1).get();
   let user = userQuery.data[0];
@@ -63,3 +64,14 @@ exports.main = async () => {
     familyId: family._id
   };
 };
+
+async function ensureCollections() {
+  if (typeof db.createCollection !== "function") return;
+  await Promise.all(["users", "families", "bills", "budgets"].map(async (name) => {
+    try {
+      await db.createCollection(name);
+    } catch (error) {
+      // The collection already exists or the environment disallows creation here.
+    }
+  }));
+}
