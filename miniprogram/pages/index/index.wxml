@@ -1,0 +1,44 @@
+<view class="page">
+  <view class="hero">
+    <view>
+      <text class="eyebrow">家庭账本</text>
+      <view class="title">淘熙粑粑</view>
+    </view>
+    <view class="month">{{month}}</view>
+  </view>
+
+  <view class="summary panel">
+    <view class="summary-item">
+      <text class="label">本月支出</text>
+      <text class="expense">¥{{summary.expense}}</text>
+    </view>
+    <view class="summary-item">
+      <text class="label">本月收入</text>
+      <text class="income">¥{{summary.income}}</text>
+    </view>
+    <view class="summary-item">
+      <text class="label">结余</text>
+      <text class="balance">¥{{summary.balance}}</text>
+    </view>
+  </view>
+
+  <view class="actions">
+    <button class="primary-button" bindtap="goAddExpense">记一笔支出</button>
+    <button class="ghost-button" bindtap="goAddIncome">记一笔收入</button>
+  </view>
+
+  <view class="section-title">最近账单</view>
+  <view wx:if="{{loading}}" class="empty panel">加载中...</view>
+  <view wx:elif="{{bills.length === 0}}" class="empty panel">还没有账单，先记一笔吧</view>
+  <view wx:else class="bill-list">
+    <view wx:for="{{bills}}" wx:key="_id" class="bill panel" data-id="{{item._id}}" bindtap="editBill">
+      <view class="bill-left">
+        <view class="category">{{item.category}}</view>
+        <view class="note muted">{{item.note || item.date}}</view>
+      </view>
+      <view class="bill-right {{item.type}}">
+        {{item.type === 'income' ? '+' : '-'}}¥{{item.amountText}}
+      </view>
+    </view>
+  </view>
+</view>

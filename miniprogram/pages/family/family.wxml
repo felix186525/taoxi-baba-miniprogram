@@ -1,0 +1,44 @@
+<view class="page">
+  <view class="profile panel">
+    <view class="avatar">爸</view>
+    <view>
+      <view class="title">我的家庭账本</view>
+      <view class="muted">和家人一起记录日常收支</view>
+    </view>
+  </view>
+
+  <view class="card panel">
+    <view class="card-label">家庭名称</view>
+    <view class="card-value">{{family.name || '淘熙家的账本'}}</view>
+  </view>
+
+  <view class="card panel">
+    <view class="card-label">家庭ID</view>
+    <view class="family-id">{{family._id || '-'}}</view>
+    <button class="ghost-button copy" bindtap="copyFamilyId">复制家庭ID</button>
+  </view>
+
+  <view class="card panel">
+    <view class="card-label">加入其他家庭</view>
+    <view class="join-row">
+      <input class="join-input" placeholder="粘贴家庭ID" value="{{joinFamilyId}}" bindinput="onJoinFamilyInput" />
+      <button class="join-button" bindtap="requestJoinFamily">申请</button>
+    </view>
+  </view>
+
+  <view wx:if="{{family.isOwner && family.pendingMembers.length}}" class="card panel">
+    <view class="card-label">待审核成员</view>
+    <view wx:for="{{family.pendingMembers}}" wx:key="openid" class="pending-row">
+      <view class="pending-openid">{{item.openid}}</view>
+      <view class="pending-actions">
+        <button class="approve-button" data-openid="{{item.openid}}" bindtap="approveJoin">通过</button>
+        <button class="reject-button" data-openid="{{item.openid}}" bindtap="rejectJoin">拒绝</button>
+      </view>
+    </view>
+  </view>
+
+  <view class="tips panel">
+    <view class="tips-title">第一版说明</view>
+    <view class="tips-text">当前版本已支持家庭账本、收支记录、统计、预算提醒和成员申请审核。家人输入家庭ID申请后，家庭创建者可在此审核。</view>
+  </view>
+</view>

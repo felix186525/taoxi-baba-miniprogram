@@ -1,0 +1,36 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/bill-edit/bill-edit",
+    "pages/stats/stats",
+    "pages/family/family"
+  ],
+  "window": {
+    "navigationBarTitleText": "淘熙粑粑",
+    "navigationBarBackgroundColor": "#f7f0df",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#f7f0df"
+  },
+  "tabBar": {
+    "color": "#777777",
+    "selectedColor": "#1f8a70",
+    "backgroundColor": "#fffaf0",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "账单"
+      },
+      {
+        "pagePath": "pages/stats/stats",
+        "text": "统计"
+      },
+      {
+        "pagePath": "pages/family/family",
+        "text": "家庭"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

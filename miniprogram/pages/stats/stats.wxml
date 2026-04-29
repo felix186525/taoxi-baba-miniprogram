@@ -1,0 +1,50 @@
+<view class="page">
+  <view class="header">
+    <view class="title">本月统计</view>
+    <view class="muted">{{month}}</view>
+  </view>
+
+  <view class="summary panel">
+    <view>
+      <text class="label">支出</text>
+      <text class="value expense">¥{{summary.expense}}</text>
+    </view>
+    <view>
+      <text class="label">收入</text>
+      <text class="value income">¥{{summary.income}}</text>
+    </view>
+    <view>
+      <text class="label">结余</text>
+      <text class="value">¥{{summary.balance}}</text>
+    </view>
+  </view>
+
+  <view class="budget panel">
+    <view class="budget-head">
+      <view>
+        <view class="budget-title">月度预算</view>
+        <view class="muted">{{budgetTip}}</view>
+      </view>
+      <view class="budget-percent">{{budget.percent}}%</view>
+    </view>
+    <view class="progress">
+      <view class="progress-inner {{budget.isOver ? 'over' : ''}}" style="width: {{budgetProgress}}%;"></view>
+    </view>
+    <view class="budget-form">
+      <input class="budget-input" type="digit" placeholder="输入预算金额" value="{{budgetInput}}" bindinput="onBudgetInput" />
+      <button class="budget-button" bindtap="saveBudget">保存</button>
+    </view>
+  </view>
+
+  <view class="section-title">分类支出</view>
+  <view wx:if="{{categories.length === 0}}" class="empty panel">本月还没有支出记录</view>
+  <view wx:else class="category-list">
+    <view wx:for="{{categories}}" wx:key="category" class="category-row panel">
+      <view>
+        <view class="category-name">{{item.category}}</view>
+        <view class="muted">{{item.count}} 笔</view>
+      </view>
+      <view class="category-amount">¥{{item.amount}}</view>
+    </view>
+  </view>
+</view>
