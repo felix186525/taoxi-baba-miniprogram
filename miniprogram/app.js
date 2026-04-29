@@ -1,12 +1,19 @@
 App({
   globalData: {
-    apiBaseUrl: "http://139.224.225.188/taoxi-baba/api",
+    envId: "",
     user: null,
     familyId: ""
   },
 
   onLaunch() {
-    this.globalData.user = wx.getStorageSync("user") || null;
-    this.globalData.familyId = wx.getStorageSync("familyId") || "";
+    if (!wx.cloud) {
+      wx.showToast({ title: "请使用新版微信开发者工具", icon: "none" });
+      return;
+    }
+
+    wx.cloud.init({
+      env: this.globalData.envId || undefined,
+      traceUser: true
+    });
   }
 });

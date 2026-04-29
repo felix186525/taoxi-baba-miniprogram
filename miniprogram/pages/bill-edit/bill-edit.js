@@ -1,5 +1,4 @@
 const app = getApp();
-const api = require("../../utils/api");
 
 const categoryMap = {
   expense: ["餐饮", "购物", "交通", "教育", "医疗", "住房", "娱乐", "其他"],
@@ -63,19 +62,19 @@ Page({
 
   async ensureFamily() {
     if (app.globalData.familyId) return;
-    const result = await api.login();
+    const { result } = await wx.cloud.callFunction({ name: "login" });
     app.globalData.user = result.user;
     app.globalData.familyId = result.familyId;
-    wx.setStorageSync("user", result.user);
-    wx.setStorageSync("familyId", result.familyId);
   },
 
   async loadBill(id) {
     await this.ensureFamily();
-    const result = await api.request({
-      url: `/bills/${id}`,
+    const { result } = await wx.cloud.callFunction({
+      name: "bills",
       data: {
-        familyId: app.globalData.familyId
+        action: "detail",
+        familyId: app.globalData.familyId,
+        id
       }
     });
 
@@ -103,19 +102,21 @@ Page({
 
     wx.showLoading({ title: "保存中" });
     try {
-      const bill = {
-        familyId: app.globalData.familyId,
-        type: this.data.type,
-        category: this.data.categories[this.data.categoryIndex],
-        amount,
-        note: this.data.note.trim(),
-        date: this.data.date,
-        month: this.data.date.slice(0, 7)
-      };
-      await api.request({
-        url: this.data.id ? `/bills/${this.data.id}` : "/bills",
-        method: this.data.id ? "PUT" : "POST",
-        data: bill
+      await wx.cloud.callFunction({
+        name: "bills",
+        data: {
+          action: this.data.id ? "update" : "create",
+          id: this.data.id,
+          bill: {
+            familyId: app.globalData.familyId,
+            type: this.data.type,
+            category: this.data.categories[this.data.categoryIndex],
+            amount,
+            note: this.data.note.trim(),
+            date: this.data.date,
+            month: this.data.date.slice(0, 7)
+          }
+        }
       });
       wx.hideLoading();
       wx.navigateBack();
@@ -135,11 +136,12 @@ Page({
         if (!res.confirm) return;
         wx.showLoading({ title: "删除中" });
         try {
-          await api.request({
-            url: `/bills/${this.data.id}`,
-            method: "DELETE",
+          await wx.cloud.callFunction({
+            name: "bills",
             data: {
-              familyId: app.globalData.familyId
+              action: "delete",
+              familyId: app.globalData.familyId,
+              id: this.data.id
             }
           });
           wx.hideLoading();

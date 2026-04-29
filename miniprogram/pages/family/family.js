@@ -1,5 +1,4 @@
 const app = getApp();
-const api = require("../../utils/api");
 
 Page({
   data: {
@@ -16,16 +15,15 @@ Page({
 
   async loadFamily() {
     if (!app.globalData.familyId) {
-      const result = await api.login();
+      const { result } = await wx.cloud.callFunction({ name: "login" });
       app.globalData.user = result.user;
       app.globalData.familyId = result.familyId;
-      wx.setStorageSync("user", result.user);
-      wx.setStorageSync("familyId", result.familyId);
     }
 
-    const result = await api.request({
-      url: "/family",
+    const { result } = await wx.cloud.callFunction({
+      name: "families",
       data: {
+        action: "detail",
         familyId: app.globalData.familyId
       }
     });
@@ -59,10 +57,10 @@ Page({
 
     wx.showLoading({ title: "申请中" });
     try {
-      const result = await api.request({
-        url: "/family/join",
-        method: "POST",
+      const { result } = await wx.cloud.callFunction({
+        name: "families",
         data: {
+          action: "requestJoin",
           familyId: this.data.joinFamilyId
         }
       });
@@ -86,10 +84,10 @@ Page({
   async reviewJoin(openid, action) {
     wx.showLoading({ title: "处理中" });
     try {
-      await api.request({
-        url: action === "approveJoin" ? "/family/approve" : "/family/reject",
-        method: "POST",
+      await wx.cloud.callFunction({
+        name: "families",
         data: {
+          action,
           familyId: this.data.family._id,
           openid
         }

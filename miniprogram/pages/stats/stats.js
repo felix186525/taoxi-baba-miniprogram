@@ -1,5 +1,4 @@
 const app = getApp();
-const api = require("../../utils/api");
 
 Page({
   data: {
@@ -34,16 +33,15 @@ Page({
 
   async loadStats() {
     if (!app.globalData.familyId) {
-      const result = await api.login();
+      const { result } = await wx.cloud.callFunction({ name: "login" });
       app.globalData.user = result.user;
       app.globalData.familyId = result.familyId;
-      wx.setStorageSync("user", result.user);
-      wx.setStorageSync("familyId", result.familyId);
     }
 
-    const result = await api.request({
-      url: "/stats",
+    const { result } = await wx.cloud.callFunction({
+      name: "bills",
       data: {
+        action: "stats",
         familyId: app.globalData.familyId,
         month: this.data.month
       }
@@ -77,10 +75,10 @@ Page({
 
     wx.showLoading({ title: "保存中" });
     try {
-      await api.request({
-        url: "/budget",
-        method: "PUT",
+      await wx.cloud.callFunction({
+        name: "budgets",
         data: {
+          action: "set",
           familyId: app.globalData.familyId,
           month: this.data.month,
           amount

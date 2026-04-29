@@ -1,5 +1,4 @@
 const app = getApp();
-const api = require("../../utils/api");
 
 const categories = ["餐饮", "购物", "交通", "教育", "医疗", "住房", "娱乐", "其他"];
 
@@ -32,18 +31,17 @@ Page({
 
   async ensureLogin() {
     if (app.globalData.user && app.globalData.familyId) return;
-    const result = await api.login();
+    const { result } = await wx.cloud.callFunction({ name: "login" });
     app.globalData.user = result.user;
     app.globalData.familyId = result.familyId;
-    wx.setStorageSync("user", result.user);
-    wx.setStorageSync("familyId", result.familyId);
   },
 
   async loadBills() {
     try {
-      const result = await api.request({
-        url: "/bills",
+      const { result } = await wx.cloud.callFunction({
+        name: "bills",
         data: {
+          action: "list",
           familyId: app.globalData.familyId,
           month: this.data.month
         }
