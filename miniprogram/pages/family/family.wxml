@@ -2,12 +2,13 @@
   <view class="hero-panel family-hero">
     <view class="hero-top">
       <view>
-        <text class="eyebrow">家庭空间</text>
+        <text class="eyebrow">焕新版家庭</text>
         <view class="page-title">我的家庭账本</view>
         <view class="page-subtitle">和家人一起记录日常收支</view>
       </view>
       <view class="avatar">爸</view>
     </view>
+    <view class="neo-strip">V2 UI 已更新</view>
   </view>
 
   <view class="card panel family-name-card">

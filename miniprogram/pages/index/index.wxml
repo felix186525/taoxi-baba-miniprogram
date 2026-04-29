@@ -2,12 +2,13 @@
   <view class="hero-panel home-hero">
     <view class="hero-top">
       <view>
-      <text class="eyebrow">家庭账本</text>
+        <text class="eyebrow">焕新版家庭账本</text>
         <view class="page-title">淘熙粑粑</view>
         <view class="page-subtitle">把家的每一笔钱都记清楚</view>
       </view>
       <view class="hero-badge">{{month}}</view>
     </view>
+    <view class="neo-strip">V2 UI 已更新</view>
     <view class="hero-total">
       <text class="hero-label">本月结余</text>
       <text class="hero-amount">¥{{summary.balance}}</text>

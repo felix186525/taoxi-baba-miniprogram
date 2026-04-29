@@ -2,12 +2,13 @@
   <view class="hero-panel stats-hero">
     <view class="hero-top">
       <view>
-        <text class="eyebrow">数据看板</text>
+        <text class="eyebrow">焕新版看板</text>
         <view class="page-title">本月统计</view>
         <view class="page-subtitle">{{month}}</view>
       </view>
       <view class="hero-badge">{{budget.percent}}%</view>
     </view>
+    <view class="neo-strip">V2 UI 已更新</view>
     <view class="hero-total">
       <text class="hero-label">本月支出</text>
       <text class="hero-amount">¥{{summary.expense}}</text>

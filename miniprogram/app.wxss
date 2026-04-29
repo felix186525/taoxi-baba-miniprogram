@@ -97,6 +97,21 @@ page {
   text-align: center;
 }
 
+.neo-strip {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  height: 48rpx;
+  margin-top: 28rpx;
+  padding: 0 18rpx;
+  border-radius: 999rpx;
+  background: rgba(242, 201, 76, 0.22);
+  color: #fff4b8;
+  font-size: 24rpx;
+  font-weight: 900;
+}
+
 .section-title {
   margin: 34rpx 0 18rpx;
   color: #17212b;
