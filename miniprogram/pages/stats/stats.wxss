@@ -123,6 +123,7 @@
   align-items: center;
   grid-template-columns: minmax(0, 1fr) 144rpx;
   gap: 14rpx;
+  width: 100%;
 }
 
 .budget-input {
@@ -132,7 +133,9 @@
 
 .budget-button {
   box-sizing: border-box;
+  width: 100%;
   height: 88rpx;
+  margin: 0;
   min-width: 0;
   padding: 0;
   overflow: hidden;
