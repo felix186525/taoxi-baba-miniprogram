@@ -1,18 +1,22 @@
+.edit-hero {
+  min-height: 220rpx;
+}
+
 .type-toggle {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 12rpx;
+  gap: 10rpx;
   padding: 10rpx;
-  margin: 18rpx 0 24rpx;
+  margin: 0 0 22rpx;
 }
 
 .toggle-item {
-  height: 72rpx;
-  border-radius: 12rpx;
-  color: #7d7566;
+  height: 78rpx;
+  border-radius: 18rpx;
+  color: #7d8894;
   font-size: 28rpx;
-  font-weight: 700;
-  line-height: 72rpx;
+  font-weight: 900;
+  line-height: 78rpx;
   text-align: center;
 }
 
@@ -29,12 +33,12 @@
 }
 
 .form {
-  padding: 10rpx 28rpx;
+  padding: 6rpx 28rpx;
 }
 
 .field {
-  padding: 28rpx 0;
-  border-bottom: 2rpx solid rgba(44, 44, 44, 0.06);
+  padding: 30rpx 0;
+  border-bottom: 2rpx solid rgba(23, 33, 43, 0.06);
 }
 
 .field:last-child {
@@ -50,8 +54,9 @@
 .field-label {
   display: block;
   margin-bottom: 14rpx;
-  color: #7d7566;
+  color: #7d8894;
   font-size: 26rpx;
+  font-weight: 700;
 }
 
 .row .field-label {
@@ -59,20 +64,24 @@
 }
 
 .amount-input {
-  height: 88rpx;
-  font-size: 56rpx;
-  font-weight: 800;
+  height: 96rpx;
+  color: #17212b;
+  font-size: 64rpx;
+  font-weight: 900;
+  line-height: 96rpx;
 }
 
 .note-input {
-  height: 64rpx;
+  height: 76rpx;
+  color: #17212b;
   font-size: 30rpx;
+  line-height: 76rpx;
 }
 
 .picker-value {
-  color: #2c2c2c;
+  color: #17212b;
   font-size: 30rpx;
-  font-weight: 700;
+  font-weight: 900;
 }
 
 .save {
@@ -80,11 +89,5 @@
 }
 
 .delete-button {
-  height: 76rpx;
   margin-top: 18rpx;
-  border-radius: 12rpx;
-  background: transparent;
-  color: #d6533c;
-  font-size: 28rpx;
-  line-height: 76rpx;
 }

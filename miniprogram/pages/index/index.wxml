@@ -1,10 +1,17 @@
 <view class="page">
-  <view class="hero">
-    <view>
+  <view class="hero-panel home-hero">
+    <view class="hero-top">
+      <view>
       <text class="eyebrow">家庭账本</text>
-      <view class="title">淘熙粑粑</view>
+        <view class="page-title">淘熙粑粑</view>
+        <view class="page-subtitle">把家的每一笔钱都记清楚</view>
+      </view>
+      <view class="hero-badge">{{month}}</view>
     </view>
-    <view class="month">{{month}}</view>
+    <view class="hero-total">
+      <text class="hero-label">本月结余</text>
+      <text class="hero-amount">¥{{summary.balance}}</text>
+    </view>
   </view>
 
   <view class="summary panel">
@@ -23,8 +30,8 @@
   </view>
 
   <view class="actions">
-    <button class="primary-button" bindtap="goAddExpense">记一笔支出</button>
-    <button class="ghost-button" bindtap="goAddIncome">记一笔收入</button>
+    <button class="primary-button" bindtap="goAddExpense">支出</button>
+    <button class="ghost-button" bindtap="goAddIncome">收入</button>
   </view>
 
   <view class="section-title">最近账单</view>
@@ -32,6 +39,7 @@
   <view wx:elif="{{bills.length === 0}}" class="empty panel">还没有账单，先记一笔吧</view>
   <view wx:else class="bill-list">
     <view wx:for="{{bills}}" wx:key="_id" class="bill panel" data-id="{{item._id}}" bindtap="editBill">
+      <view class="bill-icon {{item.type}}">{{item.type === 'income' ? '收' : '支'}}</view>
       <view class="bill-left">
         <view class="category">{{item.category}}</view>
         <view class="note muted">{{item.note || item.date}}</view>

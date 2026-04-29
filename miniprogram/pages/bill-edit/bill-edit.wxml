@@ -1,4 +1,15 @@
 <view class="page">
+  <view class="hero-panel edit-hero">
+    <view class="hero-top">
+      <view>
+        <text class="eyebrow">快速记账</text>
+        <view class="page-title">{{type === 'income' ? '记录收入' : '记录支出'}}</view>
+        <view class="page-subtitle">{{date}}</view>
+      </view>
+      <view class="hero-badge">{{categories[categoryIndex]}}</view>
+    </view>
+  </view>
+
   <view class="type-toggle panel">
     <view class="toggle-item {{type === 'expense' ? 'active expense' : ''}}" data-type="expense" bindtap="switchType">支出</view>
     <view class="toggle-item {{type === 'income' ? 'active income' : ''}}" data-type="income" bindtap="switchType">收入</view>
@@ -13,14 +24,14 @@
     <view class="field row">
       <text class="field-label">分类</text>
       <picker mode="selector" range="{{categories}}" value="{{categoryIndex}}" bindchange="onCategoryChange">
-        <view class="picker-value">{{categories[categoryIndex]}}</view>
+        <view class="picker-value">{{categories[categoryIndex]}} ›</view>
       </picker>
     </view>
 
     <view class="field row">
       <text class="field-label">日期</text>
       <picker mode="date" value="{{date}}" bindchange="onDateChange">
-        <view class="picker-value">{{date}}</view>
+        <view class="picker-value">{{date}} ›</view>
       </picker>
     </view>
 
@@ -31,5 +42,5 @@
   </view>
 
   <button class="primary-button save" bindtap="saveBill">保存账单</button>
-  <button wx:if="{{id}}" class="delete-button" bindtap="deleteBill">删除账单</button>
+  <button wx:if="{{id}}" class="danger-button delete-button" bindtap="deleteBill">删除账单</button>
 </view>
