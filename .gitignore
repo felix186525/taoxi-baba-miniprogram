@@ -7,3 +7,4 @@ data/
 *.sqlite3
 *.log
 project.private.config.json
+preview-qrcode.png
